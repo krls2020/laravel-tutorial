@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Laravel is one of the most popular PHP frameworks, known for its elegant syntax and robust features. In this tutorial, you'll learn how to deploy a Laravel application on Zerops, a modern cloud platform designed for developers. We'll set up a complete environment with Apache web server and PostgreSQL database, though Zerops also supports Nginx, MySQL and mouch more managed services like Valkey, Qdrant or Elasticsearch.
+Laravel is one of the most popular PHP frameworks, known for its elegant syntax and robust features. In this tutorial, you'll learn how to deploy a Laravel application on Zerops, a modern cloud platform designed for developers. We'll set up a complete environment with Apache web server and PostgreSQL database, though Zerops also supports Nginx, MySQL and much more managed services like Valkey, Qdrant or Elasticsearch.
 
 For database management, we'll use PostgreSQL service provided by Zerops. Using built-in VPN functionality, you'll be able to connect to the database directly from your local environment without needing PostgreSQL installed locally. This means you can use your favorite database tools and run Laravel migrations while working with the database in Zerops.
 
@@ -81,7 +81,7 @@ When you create a project in Zerops, you're getting much more than just a collec
 
 #### Production-Ready Infrastructure and Network Security
 
-When you create a project in Zerops, you get a production-grade infrastructure that eliminates common development headaches. Say goodbye to "it works on my machine" problems – your entire team can develop against an identical environment that perfectly matches production.
+When you create a project in Zerops, you get a production-grade infrastructure that eliminates common development headaches. Avoid the 'it works on my machine' issues – your team will develop in environments identical to production.
 
 Each project runs in its own isolated network with enterprise-level security features automatically configured:
 - A smart load balancer handles traffic distribution and security
@@ -148,7 +148,7 @@ By setting `mode: HA` for the PostgreSQL service, we get:
 
 Through Zerops VPN, you can securely access this enterprise-grade database setup directly from your local machine, ensuring your development environment matches production exactly.
 
-Setting up a production-grade HA database cluster typically requires extensive DevOps expertise and careful configuration of replication, failover mechanisms, and load balancing. With Zerops, you get this enterprise-level setup automatically. This means you can develop against the same robust database infrastructure that you'll use in production, eliminating environment discrepancies and ensuring your code works consistently across all stages of development.
+Configuring a production-grade HA database cluster usually demands DevOps expertise for replication, failover, and load balancing. With Zerops, this is automated. With Zerops, you get this enterprise-level setup automatically. This means you can develop against the same robust database infrastructure that you'll use in production, eliminating environment discrepancies and ensuring your code works consistently across all stages of development.
 
 Now create the project by running:
 ```bash
@@ -288,7 +288,7 @@ Initialize git in your project directory:
 git init
 ```
 
-> 💡 **Note:** Git is used to determine which files should be sent to Zerops. You don't need to commit any changes, but git initialization is required for the deployment process.
+> 💡 **Note:** Git is required to track changes for deployment. You don't need to commit but initializing git helps Zerops manage the deployment files.
 
 Push your code to Zerops:
 ```bash
@@ -385,7 +385,7 @@ Once your application is deployed, you might want to access the database directl
 zcli vpn up
 ```
 
-> 💡 **Note:** Now you can access your services dirrectly with hosname. Try http://app.zerops/ to verify connectivity.
+> 💡 **Note:** Now you can access your services directly with hosname. Try http://app.zerops/ to verify connectivity.
 
 2. Select your project when prompted
 
