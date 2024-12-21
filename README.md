@@ -2,16 +2,17 @@
 
 ## Introduction
 
-Laravel is one of the most popular PHP frameworks, known for its elegant syntax and robust features. In this tutorial, you'll learn how to deploy a Laravel application on Zerops, a modern cloud platform designed for developers. We'll set up a complete environment with Apache web server and PostgreSQL database, though Zerops also supports Nginx, MySQL and much more managed services like Valkey, Qdrant or Elasticsearch.
+Laravel is one of the most popular PHP frameworks, known for its elegant syntax and robust features. In this tutorial, you'll learn how to deploy a Laravel application on Zerops, a modern cloud platform designed for developers. We'll configure a complete environment using Apache as the web server and PostgreSQL as the database. Zerops also supports Nginx, MySQL, and other managed services like Valkey, Qdrant, and Elasticsearch.
 
-For database management, we'll use PostgreSQL service provided by Zerops. Using built-in VPN functionality, you'll be able to connect to the database directly from your local environment without needing PostgreSQL installed locally. This means you can use your favorite database tools and run Laravel migrations while working with the database in Zerops.
+By utilizing Zerops' built-in VPN functionality, you’ll be able to securely connect to your PostgreSQL database directly from your local environment, without needing to install PostgreSQL locally. This setup allows you to use your favorite database tools and perform Laravel migrations while working with a PostgreSQL database hosted on Zerops.
 
-By the end of this guide, you'll have:
-- A fresh Laravel installation running locally
-- A configured Zerops project with Apache and PostgreSQL
-- Zero downtime deployment setup with environment variables
-- A production-ready Laravel application accessible via Zerops subdomain
-- Secure VPN access to your PostgreSQL database
+By the end of this tutorial, you will:
+- Have a fresh Laravel installation running locally
+- Set up a Zerops project with Apache and PostgreSQL
+- Configure zero-downtime deployment with environment variables
+- Deploy a production-ready Laravel application accessible via a Zerops subdomain
+- Set up secure VPN access to your PostgreSQL database
+
 
 > 💡 **Quick Start:** If you want to skip the tutorial and deploy a similar setup right away, you can find a complete example in our [Laravel Recipe Repository](https://github.com/zeropsio/recipe-laravel-minimal) and deploy it directly using the "Deploy on Zerops" button.
 
@@ -141,7 +142,7 @@ Default scaling ranges for each service:
 #### High-Availability Database
 
 By setting `mode: HA` for the PostgreSQL service, we get:
-- A database cluster distributed across **three physical servers**
+- A database cluster distributed across ***three physical servers*** 
 - Automatic failover and data replication
 - Enhanced performance through load distribution
 - Production-grade reliability
