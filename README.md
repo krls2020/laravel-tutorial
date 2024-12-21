@@ -19,8 +19,9 @@ By the end of this guide, you'll have:
 
 Before you begin, ensure you have:
 
-- A Zerops [account](https://app.zerops.io)
-- Git installed (required for deployment)
+- [ ] Basic familiarity with PHP, Composer, and Laravel framework
+- [ ] A Zerops account
+- [ ] Git installed (required for deployment)
 
 > 📝 **Note:** While we'll use PHP 8.4 on Zerops, your local PHP version can be any version supported by your Laravel project.
 
@@ -45,6 +46,7 @@ Visit `http://localhost:8000` in your browser. You should see Laravel's welcome 
 
 > 💡 **Note:** While we're using Laravel's built-in server for simplicity, you can use any local development setup you prefer (Valet, Sail, XAMPP, etc.).
 
+![Laravel Welcome Page](https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg)
 
 If you see this page, great! Your local setup is working correctly. Press `Ctrl+C` in your terminal to stop the development server.
 
@@ -79,7 +81,27 @@ zcli login PLACE_TOKEN_HERE
 
 ### Creating Project Configuration
 
-> 🔍 **Note:** Zerops automatically creates network connections between services in the same project. Your `app` service will be able to reach the `db` service using the hostname `db`.
+When you create a project in Zerops, you're getting much more than just a collection of services. Let's look at what happens behind the scenes and how to configure it.
+
+#### Infrastructure and Network Security
+
+When you create a project in Zerops, you get a production-grade infrastructure that eliminates common development headaches. Say goodbye to "it works on my machine" problems – your entire team can develop against an identical environment that perfectly matches production.
+
+Each project runs in its own isolated network with enterprise-level security features automatically configured:
+- A smart load balancer handles traffic distribution and security
+- Every service gets automatic SSL/TLS certificate management
+- Internal services communicate securely using simple hostnames (like 'db' or 'app')
+- The entire infrastructure is accessible through a secure VPN
+
+What makes this special is how it combines security with simplicity. You can:
+- Connect to your databases from local tools with full security
+- Let team members access services without complex firewall rules
+- Run local development against production-identical services
+- Deploy changes knowing they'll work exactly as they did in development
+
+Best of all, this infrastructure requires zero configuration from you – it's all handled automatically when you create your project.
+
+#### Project Configuration File
 
 Create a new file called `zerops-project-import.yml` with the following content:
 
@@ -96,17 +118,48 @@ services:
     
   - hostname: db
     type: postgresql@16
-    mode: NON_HA
+    mode: HA  # High Availability mode for robust production setup
 ```
 
 > 💡 **Note:** The `#yamlPreprocessor=on` directive enables Zerops' YAML preprocessing for this import file, allowing us to use dynamic values and built-in functions like `generateRandomString`.
 
-### Creating Project using zcli
+#### Automatic Resource Management
+
+One of Zerops' most powerful features is its intelligent autoscaling system. You don't need to specify fixed resource allocations because Zerops automatically:
+- Scales resources (CPU, RAM, Disk) up and down based on actual usage
+- Maintains minimum required resources to optimize costs
+- Handles vertical and horizontal scaling automatically
+- Manages disk space dynamically (a unique feature in the industry)
+
+Default scaling ranges for each service:
+- Containers: 1-6 instances
+- CPU Cores: 1-5 shared cores
+- RAM: 0.25GB-32GB
+- Disk: 1GB-100GB
+
+#### High-Availability Database
+
+By setting `mode: HA` for the PostgreSQL service, we get:
+- A database cluster distributed across three physical servers
+- Automatic failover and data replication
+- Enhanced performance through load distribution
+- Production-grade reliability
+
+Through Zerops VPN, you can securely access this enterprise-grade database setup directly from your local machine, ensuring your development environment matches production exactly.
+
+> ⚡ **Power User Tip:** The HA setup automatically handles complex configurations like replication, failover, and load balancing that would typically require significant DevOps expertise to configure manually.
 
 Now create the project by running:
 ```bash
 zcli project project-import zerops-project-import.yml
 ```
+
+> 💡 **Team Collaboration Tip:** This declarative approach to infrastructure configuration provides significant advantages for team development:
+> - New team members can quickly create identical development environments
+> - Infrastructure configuration is transparent and easily reviewable
+> - Setup is deterministic and reproducible across all environments
+> - Changes to infrastructure can be version-controlled alongside your code
+> - Everyone in the team has clear visibility of the project's infrastructure
 
 ### Alternative: Creating Project via GUI
 
@@ -219,11 +272,37 @@ Push your code to Zerops:
 zcli push
 ```
 
-You'll see output similar to:
+You'll go through an interactive selection process:
+
+1. First, you'll see a list of your projects:
 ```
-Preparing deployment package...
-Uploading files...
-Build triggered successfully!
+SELECT  Please, select a project
+ID                         NAME                    ORG NAME                STATUS
+jrkERI7FTrZn7jwcTnACCA    laravel-zerops         ORGANIZATION_NAME       ACTIVE
+```
+Select your project from the list.
+
+2. Then, you'll select the service:
+```
+INFO    Selected project: laravel-zerops
+SELECT  Please, select a service
+
+ID                         NAME        STATUS
+7pinFB1ZSIeGz16OIi4GuQ    app         ACTIVE
+cD2fDBetS0KPQAcIsnH8OA    db          ACTIVE
+```
+Select the "app" service.
+
+3. The deployment will proceed with output like:
+```
+INFO    Selected project: laravel-zerops
+INFO    Selected service: app
+INFO    creating package
+INFO    File zerops.yml found. Path: /path/to/zerops.yml
+DONE    package uploaded
+INFO    package created
+INFO    deploying service
+DONE    Push finished
 ```
 
 ### Monitoring the Deployment
@@ -311,6 +390,16 @@ DB_PASSWORD=[password from Access details]
 
 Now you can use your favorite database management tool or run artisan commands while working with the database in Zerops - no local PostgreSQL installation needed!
 
+## Next Steps
+
+Now that your Laravel application is running on Zerops, consider:
+
+- [ ] Setting up a custom domain
+- [ ] Implementing CI/CD pipelines
+- [ ] Configuring automated backups
+- [ ] Setting up staging environments
+- [ ] Implementing environment-specific configurations
+
 ## Conclusion
 
 Congratulations! 🎉 You've successfully deployed a Laravel application on Zerops with Apache and PostgreSQL. Your application is now running in a production-ready environment with automated builds and deployments.
@@ -318,11 +407,12 @@ Congratulations! 🎉 You've successfully deployed a Laravel application on Zero
 ### Additional Resources
 
 - [Official Zerops Documentation](https://docs.zerops.io)
+- [Laravel Documentation](https://laravel.com/docs)
 - [Laravel Recipe Repository](https://github.com/zeropsio/recipe-laravel-minimal)
 - [zcli Documentation](https://github.com/zeropsio/zcli)
 
 ### Need Help?
 
-- Join [Zerops Discord](https://discord.com/invite/WDvCZ54)
+- Join the [Zerops Community](https://community.zerops.io)
 - Check out the [Zerops Blog](https://zerops.io/blog)
 - Follow [@zeropsio](https://twitter.com/zeropsio) on Twitter
