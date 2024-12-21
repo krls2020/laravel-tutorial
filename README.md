@@ -101,7 +101,7 @@ Best of all, this infrastructure requires zero configuration from you – it's a
 
 Let's create our project definition in YAML. This approach provides clear, reproducible infrastructure configuration that can be version controlled. Later in this tutorial, we'll also show how to achieve the same using the GUI.
 
-Create a new file called `zerops-project-import.yml` with the following content:
+Create a new file in your project root called `zerops-project-import.yml` with the following content:
 
 ```yaml
 #yamlPreprocessor=on
@@ -299,9 +299,10 @@ You'll go through an interactive selection process:
 
 1. First, you'll see a list of your projects:
 ```
-SELECT  Please, select a project
-ID                        NAME                   ORG NAME                STATUS
-jrkERI7FTrZn7jwcTnACCA    laravel-zerops         ORGANIZATION_NAME       ACTIVE
+Please, select a project
+| ID                       | NAME                | ORG NAME              | STATUS |
+|--------------------------|---------------------|-----------------------|--------|
+| jrkERI7FTrZn7jwcTnACCA   | laravel-zerops      | ORGANIZATION_NAME     | ACTIVE |
 ```
 Select your project from the list.
 
@@ -310,9 +311,10 @@ Select your project from the list.
 INFO    Selected project: laravel-zerops
 SELECT  Please, select a service
 
-ID                        NAME        STATUS
-7pinFB1ZSIeGz16OIi4GuQ    app         ACTIVE
-cD2fDBetS0KPQAcIsnH8OA    db          ACTIVE
+| ID                       | NAME    | STATUS |
+|--------------------------|---------|--------|
+| 7pinFB1ZSIeGz16OIi4GuQ   | app     | ACTIVE |
+| cD2fDBetS0KPQAcIsnH8OA   | db      | ACTIVE |
 ```
 Select the "app" service.
 
