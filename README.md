@@ -360,10 +360,8 @@ Let's create a quick route to test database connectivity. Add this to your `rout
 
 ```php
 Route::get('/db-test', function () {
-
-  session()->save();
-  return 'Current number of active sessions in database: ' . DB::table('sessions')->count();
-                                          
+    session()->save();
+    return 'Current number of active sessions in database: ' . Illuminate\Support\Facades\DB::table('sessions')->count();
 });
 ```
 
@@ -384,6 +382,8 @@ Once your application is deployed, you might want to access the database directl
 ```bash
 zcli vpn up
 ```
+
+> 💡 **Note:** Now you can access your services dirrectly with hosname. Try http://app.zerops/ to verify connectivity.
 
 2. Select your project when prompted
 
@@ -407,8 +407,6 @@ DB_USERNAME=db
 DB_PASSWORD=[password from Access details]
 ```
 
-> 🔒 **Security Note:** Never share or commit your database credentials. Always get them from the Zerops dashboard Access details section.
-
 Now you can use your favorite database management tool or run artisan commands while working with the database in Zerops - no local PostgreSQL installation needed!
 
 ## Next Steps
@@ -416,10 +414,8 @@ Now you can use your favorite database management tool or run artisan commands w
 Now that your Laravel application is running on Zerops, consider:
 
 - [ ] Setting up a custom domain
-- [ ] Implementing CI/CD pipelines
-- [ ] Configuring automated backups
-- [ ] Setting up staging environments
-- [ ] Implementing environment-specific configurations
+- [ ] Implementing basic CI/CD pipelines implementing [GitHub](https://docs.zerops.io/references/github-integration) or [GitLab](https://docs.zerops.io/references/gitlab-integration) integration
+- [ ] Setting up [object storage](https://docs.zerops.io/object-storage/overview)
 
 ## Conclusion
 
