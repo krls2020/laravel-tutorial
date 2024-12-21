@@ -141,7 +141,7 @@ Default scaling ranges for each service:
 #### High-Availability Database
 
 By setting `mode: HA` for the PostgreSQL service, we get:
-- A database cluster distributed across ***three physical servers*** 
+- A database cluster distributed across **three physical servers**
 - Automatic failover and data replication
 - Enhanced performance through load distribution
 - Production-grade reliability
